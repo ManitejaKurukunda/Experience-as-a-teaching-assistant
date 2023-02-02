@@ -1,0 +1,1342 @@
+---
+title: "Learn R: Practice"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+```{r, include=FALSE}
+
+tutorial::go_interactive()
+library(dplyr)
+rivers <- data(rivers)
+r <- rivers
+mtcars <- data(mtcars)
+iris <- data(iris)
+longley <- data(longley)
+l <- longley
+```
+
+## Introduction
+
+These practice questions are designed to help you master the material from *Learn R*. Each section corresponds to a section from *Learn R* that involves coding.
+
+Here are some points to keep in mind:
+
+- The practice questions usually include code boxes for writing and evaluating code. The code you write in the script portion of the window (left tab) will be evaluated all at once (when you press "Run"), whereas the code you write in the console (right tab) can be run line by line by pressing Return. The console is introduced in one of the first *Learn R* lessons.  The lesson on R scripts comes later, if you'd like to skip ahead and read it. Either tab works fine for learning; use the one that  you prefer.
+- The code boxes are provided for your convenience. You could easily do all of this coding directly in RStudio.
+- Note that text preceded by a hashtag (`#`) in the script will not be executed by R. Any code you want to be evaluated should be included on a line *without* a hashtag.
+- The code boxes include a button in the lower left labeled "Solution." Click this button if you get stuck and would like to see solution code or want to check your answers.
+- If you refresh this page your work in the code boxes will disappear! You would need to copy and paste your code into another document to save it. (The solution code will always be available through the "Solution" button.)
+
+## First Steps
+
+R can be used as a calculator but you must be careful to use parentheses appropriately for complicated calculations. For reference:
+
+-   Subtract: `-`.
+-   Divide: `/`.
+-   Multiply: `*`.
+-   Raise to a power: `^`. 
+-   Calculate the remainder of division (the modulo operator): `%%`. 
+
+
+*Questions*:
+
+1. Experiment with subtraction, division and multiplication in the console.
+
+2.  Attempt a couple of calculations:
+
+    -   Subtract 5 from 10 and multiply the result by 2. Answer: 10.
+
+    -   Add 4 and 5 then square the result. Answer: 81.
+
+3.  Here are several more:
+
+    -   $\frac{5^3 \text{ x } (6-3)}{60-3+4}$. Answer: 6.147541.
+
+    -   $\frac{5^{3 \text{ x } 6} -3}{60-3+4}$. Answer: 62536020748.
+
+    -   $\frac{.55 - (1 - .55)^\frac{1}{2}}{29}$. Answer: .00416622.
+
+    -   $\frac{.55 - 1 - .55^\frac{1}{2}}{29}$. Answer: -.04109034.
+    
+4.  Explore the modulo operator. (Remember: modulo calculates the remainder after division.)
+
+    - What is 10 %% 1?  This equals 0 because there is no remainder: 10 / 1 = 10 + 0. The "+ 0" is the remainder.
+    - 7 %% 2? This is 1 because 7 / 2 = 3 + 1.  The "+ 1" is the remainder. 
+    - What is the remainder of 99 divided by 2? Answer: 1.
+    - What is the remainder of 1.25 divided by 15? Answer 1.25. (Think about why this might be so. Consider that 1.25 / 15 is .08333333, which, multiplied by 15, is 1.25.)
+
+
+
+```{r ex="calc1", type="sample-code"}
+# 
+```
+
+
+```{r ex="calc1", type="solution"}
+# Question 2
+(10 - 5)*2
+(4 + 5) ^2
+
+# Question 3
+(5^3 * (6-3))/(60-3+4)
+(5^(3 * 6)-3)/(60-3+4)
+((.55 - (1 - .55)^(1/2)))/29
+((.55 - 1 - .55^(1/2)))/29
+
+# Question 4
+99 %% 2
+1.25 %% 15
+
+```
+
+
+## Objects
+
+One of the strengths of R is to assign values to objects with the assignment operator, `<-`. Practice creating and working with R objects.
+
+*Questions*:
+
+1.  Define two objects, `a` and `b`, to be 5 and 10, respectively. Calculate:
+
+    -   $a + b$
+
+    -   $a ^2 + b^2$
+
+    -   $a^b$
+
+    -   $\frac{a-b}{a+b}$
+
+2.  You can store a new value in an existing object. (This will overwrite the old value.) Try this with the `a` you have defined above: `a <- a / a`. Now what is the value of `a`?
+
+```{r ex="objects", type="sample-code"}
+#
+```
+
+
+```{r ex="objects", type="solution"}
+# Define objects
+a <- 5
+b <- 10
+ 
+# Question 1
+a + b
+a^2 + b^2
+a^b
+(a - b) / (a + b)
+ 
+# Question 2
+a <- a/a
+a
+```
+
+## Vectors
+
+Arithmetic operations performed on numbers can also be performed on collections of numbers called *vectors*. 
+
+*Questions*:
+
+1.  Type "rivers" in the console and press Return.  The return values are the river lengths included in the data set.
+
+2. Assign the `rivers` vector to an object, `r,` for use in these questions.  (It is often convenient to shorten the name of a data set to eliminate unnecessary typing.) 
+
+3. In `r` the lengths of rivers are recorded in miles. Convert river lengths to *kilometers* (1 mile = 1.60934 kilometers).
+
+4.  Convert river lengths to *meters*.
+
+5.  Think: suppose you have a vector, $a$, consisting in the values [1, 2]. What is the return value of 2 * $a$?
+
+6.  Think: in an R vector, $y$, consisting in [16, 25, 36, 49, 64], what is $y_4$?
+
+7. Think: what would R output for $a$ + $b$ , where $a$ is the vector [1, 2] and $b$ is the vector [7, 8, 9, 10]? 
+
+8. Think: what would R output for $a$ + $b$ , where $a$ is the vector [1, 2, 3] and $b$ is the vector [7, 8, 9, 10]? 
+
+```{r ex="vectors", type="sample-code"}
+# 
+```
+
+
+```{r ex="vectors", type="solution"}
+# Question 1
+rivers
+
+# Question 2
+r <- rivers
+
+# Question 3
+r * 1.60934
+
+# Question 4
+r * 1.60934 * 1000
+
+
+```
+
+## Functions
+
+It is no exaggeration to say that R is nothing more than a (very large) set of functions. Coding in R consequently requires that you learn to use functions.
+
+*Questions*:
+
+1. Open RStudio. Type `?mean` in the console and press Return.  What are the default arguments to this function?
+
+2. Think. How would including the argument `trim = .1` impact the calculation of a mean?
+
+3. Run this code in the console:  `mean(.1, rivers)`. It produces an error. Why?  Does the error message make sense? How would you fix the error?
+
+4. Consider a vector, $v$, defined as [1, 2, 3, NA]. (In data analysis `NA` usually means "missing.")  Calculating the mean of `v` with `mean(v)` produces `NA` as the return value. How would you adapt this function call, based on the information in the help pages, to ignore the `NA` and calculate the mean of the non-missing items in the vector?
+
+```{r ex="functions", type="sample-code"}
+# 
+```
+
+
+```{r ex="functions", type="solution"}
+# Question 3
+mean(.1, rivers)
+mean(rivers, .1)
+
+```
+
+
+## Logical Vectors
+
+Logical vectors are created by  a logical condition with the help of the logical operator.  They can be used to help answer analytic questions.
+
+
+For reference, here is a list of the main logical operators in R:
+
+- `>`: greater than.
+- `<`: less than.
+- `==`: equal to.
+- `!=`: not equal to.
+- `>=`: greater than or equal to.
+- `<=`: less than or equal to.
+- `!x`: not x.
+- `x | y`: x OR y.
+- `x & y`: x AND y.
+
+*Questions*:
+
+Using the `rivers` dataset:
+
+1. How many rivers are longer than 1500 miles?
+
+2. How many rivers are shorter than 100 miles?
+
+3. How many rivers are above average in length? 
+
+4. What proportion of rivers are above average in length?
+
+5. What percentage of rivers are above average in length?
+
+6. What percentage of rivers are longer than the median length? This should be right around 50%.  Why? Think about the definition of median. In sorted data with an odd number of observations it is the middle observation. For an even number of observations, it is a number that is midway between the two middle observations.
+
+```{r ex="log_vectors", type="sample-code"}
+# 
+```
+
+
+```{r ex="log_vectors", type="solution"}
+# Question 1
+sum(rivers > 1500) # or, using ! to reverse a result:
+sum(!(rivers < 1500))
+
+# Question 2
+sum(rivers < 100) # or
+sum(!(rivers > 100))
+
+# Question 3
+sum(rivers > mean(rivers))
+
+# Question 4
+sum(rivers > mean(rivers)) / length(rivers) # or, mean() will do the same calculation:
+mean(rivers > mean(rivers))
+
+# Question 5
+sum(rivers > mean(rivers)) / length(rivers) * 100 # or
+mean(rivers > mean(rivers)) * 100
+
+# Question 6
+sum(rivers > median(rivers)) / length(rivers) * 100 # or
+mean(rivers > median(rivers)) * 100
+
+
+```
+
+## Subsetting Vectors
+
+Subsetting data is a common and important task in data analysis. 
+
+*Questions*: 
+
+1. Select the first 10 observations in `rivers` using square brackets with colon notation. Now do the same subsetting using square brackets with the `c()` function.  Which method is easier?
+
+2. Select the the first 10 observations in `rivers` and the 100th observation using square bracket notation. Use colon notation and the `c()` function together.
+
+3. Define a vector, $v$, as the squared elements of the sequence 1:10: `v <- 1:10 * 1:10`.  Write code to return the *indices* of the observations in $v$ greater than 50. (Also, think: why does `1:10 * 1:10` work to produce `v`?)
+
+4. Use square bracket notation to subset $v$ to include *observations* greater than 50. Use three different methods, supplying the indices:
+
+    - by hand with either the `c()` function or colon notation.
+    - with the `which()` function.
+    - with a logical vector.
+    
+5. Write code to calculate how many river lengths in `rivers`  are greater than 2000 miles or less than 500.  
+
+```{r ex="subset", type="sample-code"}
+# 
+```
+
+
+```{r ex="subset", type="solution"}
+# Question 1
+rivers[1:10]
+rivers[c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)]
+
+# Question 2
+rivers[c(1:10, 100)]
+
+# Question 3
+v <- 1:10 * 1:10
+which(v > 50)
+
+# Question 4
+v[8:10]
+v[which(v > 50)]
+v[v > 50]
+
+# Question 5
+sum(rivers > 2000 | rivers < 100) # or
+length(rivers[rivers > 2000 | rivers < 100]) # but, note, this won't work:
+length(rivers > 2000 | rivers < 100)
+
+
+```
+
+
+
+## Data Frames
+
+Data frames are two-dimensional data structures commonly used in R for doing statistics and data analysis.  
+
+Let's investigate a investigate a macroeconomic data set, `longley`.  It includes 7 economic variables observed yearly from 1947 to 1962:
+
+- `GNP.deflator`: GNP implicit price deflator (1954=100)
+- `GNP`: Gross National Product.
+- `Unemployed`: number of unemployed.
+- `Armed.Forces`: number of people in the armed forces.
+- `Population`: "noninstitutionalized" population older than 14 years of age.
+- `Year`: the year.
+- `Employed`: number of people employed.
+
+
+*Questions*:
+
+
+1. Save `longley` in an object `l` for the purposes of answering these questions. 
+2. View the first 6 rows of `l`.
+3. Write code to get an overview of the structure and dimensions of the data.
+4. Get a five number summary of each column.
+5. Load `longley` in RStudio and open up the Data Viewer to see the data set as a spreadsheet.
+    
+```{r ex="df", type="sample-code"}
+# 
+```
+
+
+```{r ex="df", type="solution"}
+# Question 1
+l <- longley
+
+# Question 2
+l[1:6]
+
+# Question 3
+str(l)
+
+# Question 4
+summary(l)
+
+```
+    
+
+## Subsetting Data Frames 
+
+Subsetting data frames is a common task. 
+
+*Questions*:
+
+Using `longley`:
+
+1. Again, save `longley` as `l`.
+2. The year with the highest `GNP`.
+3. The year with the lowest `GNP`.
+4. The row with the smallest value for `Unemployed`.
+5. The year and the population when `GDP` was the largest or when `Unemployed` was the largest.
+6. The number of years in which `Employed` was greater than 65.
+
+```{r ex="subset_df", type="sample-code"}
+# 
+```
+
+
+```{r ex="subset_df", type="solution"}
+# Question 1
+l <- longley
+
+# Question 2
+l[l$GNP == max(l$GNP), "Year"]
+
+# Question 3
+l[l$GNP == min(l$GNP), "Year"]
+
+# Question 4
+l[l$Unemployed == min(l$Unemployed), ]
+
+# Question 5
+l[(l$GNP == max(l$GNP)) | (l$Unemployed == max(l$Unemployed)) , c("Year", "Population")]
+
+# Question 6
+nrow(l[l$Employed > 65, ]) 
+     # Note, this does not work to answer the question:
+length(l[l$Employed > 65, ]) 
+     # But this does:
+length(l[l$Employed > 65, "Year"])
+```
+
+## Visualizing Data
+
+Plotting is a powerful way to understand relationships in data. 
+
+*Questions*:
+
+Using `longley` (and making sure to title your plots):
+
+1. Again, save `longley` as `l`.
+2. Create a histogram of the `GNP` column.
+3. Create a scatterplot showing the relationship between `Unemployed` and `GNP`. Think:  which variable should go on the x-axis in which should go on the y-axis? Think:  how would you describe the relationship?
+4. Plot the relationship between `Population` and `Armed.Forces`, also with a scatterplot. Think:  which variable should go on the x-axis in which should go on the y-axis? Think: what is  a possible  explanation for the pattern in the plot?
+5. Think: would a boxplot work to show the relationship between `Year` and `Population`?  Why or why not?
+
+Let's work with another dataset in R, iris, which gives the measurements in centimeters of the variables `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width` for 50 flowers from each of 3 species.
+
+6. Type `summary(iris)` in the console. Notice that the result is a 5 number summary for the numeric variables, and a count of observations at each level of `Species`, a categorical variable.
+7. Create a plot to answer the question: Is there a relationship between petal length and width?
+8. Does the distribution of `Petal.Width` differ for species? Create a boxplot to answer this question.
+
+```{r ex="plot", type="sample-code"}
+# 
+```
+
+
+```{r ex="plot", type="solution"}
+# Question 1
+l <- longley
+
+# Question 2
+hist(l$GNP, main = "Histogram of GNP")
+
+# Question 3
+plot(l$Unemployed, l$GNP, main = "Scatterplot of GNP vs number of unemployed")
+
+# Question 4
+plot(l$Population, l$Armed.Forces)
+
+# Question 5
+boxplot(Year ~ Population, data = l) # This does not work!
+
+# Question 6
+summary(iris)
+
+# Question 7
+plot(iris$Petal.Length, iris$Petal.Width, main = "Scatterplot of petal length vs petal width")
+
+# Question 6
+boxplot(Petal.Width ~ Species, data = iris, main = "Distribution of petal width by species")
+```
+
+## Factors
+
+Factors are a special data type for representing categorical data in R. 
+
+*Questions*: 
+
+Suppose that guests at an Airbnb rental are asked to fill out a survey.  The survey has a question  about the guest's level of satisfaction, with two possible answers: "satisfied" or "not satisfied."  The next question asks:  "Please explain your answer." 
+
+1. Think: what is the best data type for encoding answers to the first question?  
+2. Think: what is the best data type for the second question?
+3. Turn `quality` into a factor variable, assign it to a new object, `quality_fct`, and show that the new variable is a factor. (Notice that the factor levels have been set using the default alphabetic ordering.) 
+4. Again turn `quality` into a factor variable, assign it to a new object, `quality_fct`, but change the factor levels to be:  `poor`, `average`, `good`. Show that this transformation was successful.
+5. Again turn `quality` into a factor variable, assign it to a new object, `quality_fct`, but change the factor levels to be:  `poor`, `average`, `excellet`.  Check the transformation.  Think: why are some of the observations in `quality_fct` now listed as `NA`?  
+
+
+```{r ex="factors", type="sample-code"}
+quality <- c("good", "good", "poor", "good", "average", "poor","poor", "average")
+```
+
+
+```{r ex="factors", type="solution"}
+# Question 3
+quality_fct <- factor(quality)
+quality_fct
+
+# Question 4
+quality_fct <- factor(quality, levels = c("poor", "average", "good"))
+quality_fct
+
+# Question 5
+quality_fct <- factor(quality, levels = c("poor", "average", "excellent"))
+quality_fct
+```
+
+
+## The tapply() Function
+
+`tapply()` very efficiently splits the vector into groups according to the unique values in a grouping variable, and then "applies" a function (usually to calculate a summary statistic) to each group.
+
+*Questions*:
+
+Using the iris dataset:
+ 
+Calculate mean, median, and standard deviation for `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width` by species.  (That is, you should find 3 summary statistics for each characteristic for each species.)
+
+Note that this code box includes a "solution" tab if you need help writing the code or want to check your answer.
+
+```{r ex="tapply", type="sample-code"}
+
+#
+
+
+```
+
+```{r ex="tapply", type="solution"}
+# Summary statistics for sepal length by species
+tapply(iris$Sepal.Length, iris$Species, mean)
+tapply(iris$Sepal.Length, iris$Species, median)
+tapply(iris$Sepal.Length, iris$Species, sd)
+
+# Summary statistics for sepal width by species
+tapply(iris$Sepal.Width, iris$Species, mean)
+tapply(iris$Sepal.Width, iris$Species, median)
+tapply(iris$Sepal.Width, iris$Species, sd)
+
+# Summary statistics for petal length by species
+tapply(iris$Petal.Length, iris$Species, mean)
+tapply(iris$Petal.Length, iris$Species, median)
+tapply(iris$Petal.Length, iris$Species, sd)
+
+# Summary statistics sepal width by species
+tapply(iris$Petal.Width, iris$Species, mean)
+tapply(iris$Petal.Width, iris$Species, median)
+tapply(iris$Petal.Width, iris$Species, sd)
+
+```
+
+
+
+## Filter and Arrange 
+
+The `filter()`  function produces a subset of the data frame, retaining all rows that satisfy the specified logical conditions. 
+
+The `arrange()` function sorts the data frame.
+
+*Questions*:
+
+Using the iris and mtcars data frames:
+
+Use `str()` to see the column and row information for these data frames.
+
+1. Filter iris to include only rows where `Species` is not `virginica`. 
+
+2. Filter iris to include only rows where `Species` is `versicolor`, and where both `Sepal.Length` and `Petal.Length` are greater than 3. 
+
+3. Filter iris to include rows where `Petal.width` is less than the average `Petal.width` of all `Species`. Sort by `Petal.width`.
+
+4. Filter iris  to find which species have the highest `Sepal.width` and the smallest `Petal.Length`. 
+
+5. Filter mtcars to include rows where `carb` is 1 and then sort by `gear` in descending order.
+
+6. Filter mtcars to include rows where `hp` is greater than the median value of `hp` for all cars. Sort by `mpg`.
+
+7. Return the count of cars in mtcars where `wt` is less than 400 and `vs` is 0. (Tip: Use the `nrow()` function.)
+
+8. Return a five number summary for a subset of mtcars including only rows where `disp` is above 100 or `am` is not 1. (Tip: use the `summary()` function). 
+
+9. Filter mtcars to include rows with the lowest `qsec` or highest `mpg` and sort by `cyl` in descending order.
+
+10. Filter the mtcars to include rows where `hp` lies between 100 and 250 and then sort by `hp`.
+
+Remember to load the dplyr package!
+
+```{r ex="filter and arrange", type="sample-code"}
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="filter and arrange", type="solution"}
+library(dplyr)
+
+#Question 1
+iris %>% 
+   filter(Species != "virginica")
+
+#Question 2
+iris %>%
+   filter(Sepal.Length > 3 & Petal.Length > 3 & Species == "versicolor")
+
+#Question 3
+iris %>% 
+   filter(Petal.Width < mean(Petal.Width)) %>%
+   arrange(Petal.Width)
+
+#Question 4
+iris %>% 
+   filter(Sepal.Width == max(Sepal.Width) | Petal.Length == min(Petal.Length)) 
+   
+#Question 5
+mtcars %>%
+     filter(carb == 1) %>%
+     arrange(desc(gear))
+
+#Question 6
+mtcars %>%
+     filter(hp > median(hp)) %>%
+     arrange(hp)
+
+#Question 7
+mtcars %>%
+     filter(wt < 400 & vs == 0) %>%
+     nrow()
+       
+#Question 8
+mtcars %>%
+     filter(disp > 100 | am != 1) %>%
+     summary()
+
+#Question 9
+mtcars %>%
+     filter(qsec == min(qsec) | mpg == max(mpg)) %>%
+     arrange(desc(cyl))
+
+#Question 10 
+mtcars %>%
+     filter(hp > 100 & hp < 250) %>%
+     arrange(gear)
+
+
+```
+
+
+## Select and Mutate 
+
+
+The `select()` function is used to select or rename coluns in a data frame.
+
+The `mutate()` function creates a new column. 
+
+*Questions*
+
+Use the mtcars and iris data frames.
+
+1. Select  `hp` and `gear` columns from mtcars.
+
+2. Subset mtcars to include only the `cyl` column, and change the name of  `cyl` to `Cylinders`.  
+
+3. filter mtcars to include rows where `disp` is greater than 400 and `vs` not equal to 1, then create a five number summary of `hp`.
+
+4. Convert `gear` in mtcars to a factor variable and then select `mpg`, `cyl`, `hp`, `qsec`, and `gear`. Sort the resulting data frame by `gear`.
+
+5. Create a new column in mtcars, `mpg_cyl`, consisting in `mpg`/`cyl`, and then select just three columns from the data frame:  `mpg_cyl`, `mpg`, and `cyl`.
+
+6. What is the name of the species with the highest `Sepal.Length` in iris? 
+
+7. Show the rows of `Species` and `Petal. Length` where `Petal. Length` is greater than average  `Petal.Length`.
+
+Remember to load the dplyr package!
+
+```{r ex="Select and Mutate", type="sample-code"}
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="Select and Mutate", type="solution"}
+library(dplyr)
+
+#Question 1
+mtcars %>% 
+     select(hp, gear)
+
+#Question 2 
+mtcars %>%
+     select(Cylinders = cyl)
+
+#Question 3
+mtcars %>% 
+     filter(disp > 400 | vs != 1 ) %>% 
+     select(hp) %>%
+     summary()
+
+#Question 4 
+mtcars %>%
+     mutate(gear = factor(gear)) %>%
+     select(mpg, cyl, hp, qsec, gear) %>%
+     arrange(gear)
+
+#Question 5
+mtcars %>%
+     mutate(mpg_cyl = mpg / cyl) %>%
+     select(mpg_cyl, mpg, cyl)
+
+#Question 6
+iris %>% 
+   filter(Sepal.Length == max(Sepal.Length)) %>%
+   select(Species)
+
+#Question 7
+iris %>% 
+   filter(Petal.Length > mean(Petal.Length)) %>%
+   select(Species, Petal.Length)
+
+
+
+```
+
+## Summarize and Group_by
+
+The `summarize()` function in dplyr is used to create a summary table. (Note: `summarize()` and `summarise()` are the same.)
+
+The `group_by()` function groups rows by column values, often to calculate conditional statistics for groups, like `tapply()`.
+
+*Questions*
+
+Using mtcars:
+
+1. What is average `hp` of cars grouped by  `cyl`? Round to 2 decimal places.
+
+2. What is the number of observations and the average `mpg` of cars grouped by  `carb`?  Subset the summary table to include only `carb` greater than 3. Round to 2 decimal places.
+
+3. What is the number of observations, mean, median, and standard deviation of `qsec` for cars grouped by `gear` in the `mtcars`? Round to 2 decimal places.
+
+4. What are the minimum and maximum  `disp` values for cars grouped by `cyl`  and `vs`?
+
+5. What is the number of observations, mean `wt`, and maximum `wt` of cars with `gear` equal to  4 and `vs` equal to 0, grouped by `am` and `carb`? Round to 2 decimal places. Here is code to answer that question, but it contains errors.  Correct the errors to return the correct information. (The solution is included in the final code box for this section.)
+
+```{r results='hide', error=FALSE, message=FALSE}
+mtcars %>%
+     group_by(am, carb) 
+     filter(gear = 4 & vs = '0') %>%
+     summarize()
+```
+
+
+6. Calculate summary statistics for `hp`, grouped by `carb` and `gear`.  The summary statistics should include mean, median, standard deviation, minimum, maximum, the count of observations in each group and (finally) what percentage of the total that count represents. The results should be rounded to two decimal places. Here is code to answer that question, but it contains errors.  Correct the errors to return the correct information. Once you've done so, think about why there are `NA` values in the standard deviation column. (The solution is included in the final code box for this section.)
+
+```{r results='hide', error=FALSE, message=FALSE}
+mtcars %>%
+     group_by(cyl, gear) %>%
+     summarize(avg = mean('mpg'),
+               median = median(mpg),
+               'sd' = sd(mpg),
+               min = min(mpg),
+               max = max(mpg),
+               n = n(10)) %>%
+     ungroup() %>%
+     mutate(percent = n / sum(n) * 100)) %>%
+     round(2)
+```
+
+Using iris:
+
+7. Calculate the range of `Sepal.Length` by `Species`.  Hint: remember that range is defined as maximum - minimum.  
+
+8. Calculate the standard deviation of `Petal.Width` by `Species` but include only `versicolor` in the summary table. Also, include a count of observations. Round to 2 decimal places.
+
+9. Calculate median `Petal.Length`--- call it `median_petal_length`--- for each `Species`.
+
+10. Calculate mean `Sepal.Width`, standard deviation of `Petal.Length`, and count of observations for each `Species`.  Sort this table in reverse alphabetical order by  `Species`. Round to 2 decimal places.
+
+
+Remember to load the dplyr package by running the code in the script!
+
+```{r ex="Summarize and Group_by", type="sample-code"}
+library(dplyr)
+
+```
+
+
+
+```{r ex="Summarize and Group_by", type="solution"}
+library(dplyr)
+
+#Question 1
+mtcars %>%
+     group_by(cyl) %>%
+     summarize(average_hp = mean(hp)) %>% 
+     round(2)
+
+#Question 2
+mtcars %>%
+     group_by(carb) %>%
+     summarize(n = n(),
+               average_mpg = mean(mpg)) %>%
+     filter(carb > 3 ) %>% 
+     round(2)
+
+
+#Question 3 
+mtcars %>%
+     group_by(gear) %>%
+     summarize(n = n(),
+               avg_qsec = mean(qsec),
+               median_qsec = median(qsec),
+               sd_qsec = sd(qsec)) %>% 
+     round(2)
+     
+#Question 4
+mtcars %>%
+     group_by(cyl, vs) %>%
+     summarize(min_disp = min(disp),
+               max_disp = max(disp)) 
+
+#Question 5 
+mtcars %>%
+     group_by(am, carb) %>%
+     filter(gear == 4, vs == 0) %>%
+     summarize(n = n(),
+               avg_wt = mean(wt),
+               max_wt = max(wt)) %>% 
+     round(2)
+
+#Question 6
+mtcars %>%
+     group_by(carb, gear) %>%
+     summarize(avg = mean(hp),
+               median = median(hp),
+               sd = sd(hp),
+               min = min(hp),
+               max = max(hp),
+                n = n()) %>%
+     ungroup() %>%
+     mutate(percent = n / sum(n) * 100) %>%
+     round(2)
+     
+#Question 7
+iris %>%
+   group_by(Species) %>%
+   summarize(max = max(Sepal.Length),
+             min = min(Sepal.Length),
+             range = max - min)
+
+#Question 8
+iris %>% 
+   group_by(Species) %>%
+   summarize(n = n(), 
+             sd = sd(Petal.Width),
+             sd = round(sd, 2)) %>%
+   filter(Species == "versicolor") 
+
+#Question 9
+iris %>% 
+   group_by(Species) %>%
+   summarize(median_petal_length = median(Petal.Length))
+
+#Question 10
+iris %>%
+   group_by(Species) %>%
+   summarize(mean_sw = mean(Sepal.Width), 
+             mean_sw = round(mean_sw, 2),
+             sd_pl = sd(Petal.Length), 
+             sd_pl = round(sd_pl, 2),
+             n = n()) %>%
+   arrange(desc(Species))
+
+
+
+```
+
+## The ggplot2 Package
+
+Note:  these practice questions cover all plot types from the multiple lessons in *Learn R*.
+
+The `ggplot2` package isw great for exploring data and communicating insights. Here is a quick review of the key functions:
+
+- `ggplot()` creates the blank canvas. It has two arguments: `data` and `mapping`. 
+- `geom_point()` creates a scatter plot.
+- `geom_histogram()` creates a histogram plot.
+- `geom_density()` creates a density plot---a smoothed version of a histogram.
+- `geom_boxplot()` creates a boxplot.
+- `geom_bar` creates a bar plot for a categorical variable with the heights of the bars determined by counts.
+- `geom_col` function creates a bar plot for a categorical variable with the heights of the bars drawn from a summary table.
+- `labs()` adds labeling details to a plot, like a title.
+- `facet_wrap()` creates a small multiples plot.
+
+*Questions*
+
+Using iris:
+
+1. Create a scatter plot showing the relationship between the `Sepal.Length` and `Sepal.Width` variables on the $x$- and $y$-axes, respectively, and the points colored according to the `Species` variable.  Make sure to add a title to the plot: "Scatter Plot of Sepal Length and Sepal Width by Iris Species."
+
+2. Create a scatter plot showing the relationship between the `Petal.Length` and `Petal.Width` variables on the $x$- and $y$-axes, respectively, and the points colored according to the `Species` variable.  Create  separate subplots for each species. Add a title to the plot: "Scatter Plot of Petal Length and Petal Width by Iris Species".  Think:  is this style of plot better than the one above at showing species-level differences?
+
+3. Create a histogram of `Petal.Length` with bars colored by `Species`. (Hint:  use the `fill` argument.) Add a title to the plot: "Histogram of Petal Length by Iris Species."
+
+4. Create a histogram of `Petal.Length` with bars colored by `Species`.  Create separate subplots for each `species`.  Add a title to the plot: "Histogram of Petal Length by Species."  Think: is this plot better than the one above to show species-level differences in petal length?  How could you improve it?
+
+5. Create a density plot showing `Sepal.Width`.  Exclude the `Setosa` species and filter for `Sepal.Width` greater than 3. Color of the density line according to the `Species` variable. Add a title to the plot: "Density Plot of Sepal Width for Versicolor and Virginica Species." (Hint: use `filter()` in dplyr to subset the data.)
+
+6. Create a bar plot of `Species` with the height of the bars determined by a count of observations.  Add a title.
+
+7. Create a bar plot of `Species` with the height of the bars determined by average petal length.  Add a title. (Hint: use `group_by()` and `summarize()` in dplyr.)
+
+Using mtcars:
+
+8. Create a boxplot of `hp` by  `vs`.  Add a title: "Boxplot of hp by vs." (Hint: use `mutate()` in dplyr.)
+
+9. Create a dodged bar plot of average `hp` by `am` (that is, `am` is the grouping variable) and color the bars by the values of  `carb`.  Add a title to the plot: "Bar Plot of hp by am and carb." (Hint: use `geom_col()` with the `position = "dodge"` argument and create a summary table in dplyr using `group_by()`.)
+
+10. Create a plot showing the relationships between 4 variables.  Make a dodged bar plot of the relationship between `am` and average `mpg`, with bars colored by `vs` variable and subplots for each level of `cyl`. Add a title to the plot:  "Bar Plot of Average mpg by am, cyl and vs." (Hint: you should use `mutate()`, `group_by()`, and `summarize()` in dplyr and---among other functions in ggplot2---`facet_wrap()`).
+
+
+Remember to load the dplyr and ggplot2 packages by running the code in the script!
+
+
+```{r ex="The ggplot2 Package", type="sample-code"}
+library(ggplot2)
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="The ggplot2 Package", type="solution"}
+library(ggplot2)
+library(dplyr)
+
+# Question 1
+iris %>%
+   ggplot(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+   geom_point() +
+   labs(title = "Scatter Plot of Sepal Length and Sepal Width by Iris Species")
+
+# Question 2
+iris %>%
+   ggplot(mapping = aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+   geom_point() +
+   facet_wrap(facets = ~Species) +
+   labs(title = "Scatter Plot of Petal Length and  Petal Width by Iris Species")
+
+# Question 3 
+iris %>%
+   ggplot(mapping = aes(x = Petal.Length, fill = Species)) +
+   geom_histogram() +
+   labs(title = "Histogram of Petal Length by Iris Species")
+    
+# Question 4
+iris %>%
+   ggplot(mapping = aes(x = Petal.Length)) +
+   geom_histogram() +
+   facet_wrap(facets = ~Species) +
+   labs(title = "Histogram for Petal Length by Species")
+
+# Question 5 
+iris %>%
+   filter(Sepal.Width > 3, Species != "setosa") %>%
+   ggplot(mapping = aes(x = Sepal.Width, color = Species)) +
+   geom_density() +
+   labs(title = "Density Plot of Sepal Width for Versicolor and Virginica Species")
+
+# Question 6
+iris %>% 
+   ggplot(mapping = aes(x = Species)) +
+   geom_bar() +
+   labs(title = "Bar Plot of Iris Species")
+
+# Question 7
+iris %>%
+     group_by(Species) %>% 
+     summarize(avg_length = mean(Petal.Length)) %>% 
+   ggplot(mapping = aes(x = Species, y = avg_length)) +
+   geom_col() +
+   labs(title = "Bar Plot of Average Petal Length by Iris Species")
+
+# Question 8
+mtcars %>%
+     mutate(vs = factor(vs)) %>%
+     ggplot(mapping = aes(x = vs, y = hp)) +
+     geom_boxplot() +
+     labs(title = "Box plot of hp by vs")
+    
+#Question 9
+mtcars %>% 
+     mutate(carb = factor(carb), 
+            am = factor(am)) %>%
+     group_by(carb, am) %>% 
+     summarize(avg_hp = mean(hp)) %>% 
+     ggplot(mapping = aes(x = am,y = avg_hp, fill = carb)) +
+     geom_col(position = "dodge") +
+     labs(title = "Bar plot of Average hp by am and carb")
+
+# Question 10
+mtcars %>% 
+     mutate(am = factor(am),
+            cyl = factor(cyl),
+            vs = factor(vs)) %>% 
+     group_by(am, cyl, vs) %>%
+     summarize(mean_mpg = mean(mpg)) %>%
+     ggplot(mapping = aes(x = am, y = mean_mpg, fill = vs)) +
+     geom_col(position = "dodge") +
+     facet_wrap(~ factor(cyl)) +
+     labs(title = "Bar plot of Average mpg by am, cyl and vs")
+```
+
+
+##Coding style
+
+Coding style in R refers to the conventions and best practices for writing code in the R programming language. It includes indentation, naming conventions, commenting, and code organization. Some standard coding style guidelines in R include:
+
+- Using snake_case for variable and function names rather than camelCase or PascalCase.
+- Using # for comments rather than //.
+- Using %>% for chaining together multiple operations in a single line of code.
+- Adding a space between operators and their operands (e.g., x + y, not x+y).
+
+*Questions*
+
+Using mtcars:
+
+1. How does the snake_case naming convention used in the code when creating a new variable called "Car_HP_To_WT_Ratio" in the `mtcars` dataset by dividing the `hp` by the `wt` of each car? (Not: The variable used in the question is not following the snake_case convention. Write the code with the proper snake_Case convention).
+
+2. What is the mean `mpg` (as mean_mpg) for cars with `hp` greater than 100, grouped by the variable `am` in the `mtcars` dataset? Add comments to explain the steps in the code:
+- This is a pipeline of data manipulation with dplyr.
+- filtering the data.
+- grouping by variable `am`.
+- summarizing with mean of variable `mpg`.
+
+3. What is the median `hp` (as median_hp) for cars with `gear` greater than 3, grouped by the variable `cyl` in the `mtcars` dataset, and how the data is piped to create a bar plot that shows the median_hp on the y-axis and `cyl` on the x-axis and comment each step as follows.
+
+- filtering the data.
+- grouping by variable `cyl`.
+- summarizing with a median of variable `hp`.
+- creating a bar plot with ggplot, using `cyl` as the x-axis and median_hp as the y-axis.
+- using geom_col.
+
+4. What is the spacing convention used in the code snippet, and what does it do in filtering the `mtcars` dataset for cars with `vs` equal to 1 and `wt` than 3?
+
+5. How is the data filtered in the `mtcars` dataset by using conditions `hp`  greater than 200  and `carb` less than 4 and then accessing the column `cyl` by following the quotes convention?
+
+
+```{r ex="Coding Style", type="sample-code"}
+library(ggplot2)
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="Coding Style", type="solution"}
+library(ggplot2)
+library(dplyr)
+
+# Question 1
+
+mtcars %>%
+     mutate(car_power_to_weight_ratio = hp/wt)
+
+# Question 2
+ 
+# This is a pipeline of data manipulation with dplyr
+mtcars %>%
+     # Filtering the data
+     filter(hp > 100) %>%
+     # Grouping by variable 'am'
+     group_by(am) %>%
+     # Summarizing with mean of variable 'mpg'
+     summarize(mean_mpg = mean(mpg))
+
+# Question 3 
+
+mtcars %>%
+     filter(gear > 3) %>%
+     group_by(cyl) %>%
+     summarize(median_hp = median(hp)) %>%
+     ggplot(aes(x = cyl, y = median_hp)) +
+     geom_col()
+
+# Question 4
+
+mtcars %>%
+     filter(vs == 1 & wt < 3)
+
+
+# Question 5
+
+mtcars_filterd <- mtcars %>%
+                      filter(hp > 200 & carb < 4)
+mtcars_filterd["cyl"]
+
+
+```
+
+
+##Lists
+
+In R, a list is a collection of elements of different data types, such as numbers, strings, and other lists. Lists are created using the list() function, with the elements separated by commas.
+
+*Questions
+
+Using iris:
+
+1. What is the second element of the list 'iris_filtered' that contains the species of `iris`, the mean of `sepal.Length`, and the standard deviation of `Petal.Width` from the `iris` dataset?
+
+2. What are the first 15 elements of the list 'iris_values_petal_length_lt_2' that contain the `Petal.Length` values of `iris` dataset that are less than 2?
+
+3. What is the output of the code that creates a new list, iris_bool, containing a logical vector indicating whether the `Sepal.Length` is greater than 5 using `iris` dataset and then accessing the first element of the list?
+
+4. What is the value of the second element in the list of Length_Ratio columns obtained from the `iris` data frame after selecting `Sepal.Length`, `Petal.Length` and `Species` columns, and mutating a new column Length_Ratio as the ratio of `Sepal.Length` to `Petal.Length`?
+
+5. What is the last element of the list created by combining the `Species` column and the `Mean_Sepal_Length` column of the `iris` dataset, after grouping the dataset by `Species` and summarizing the mean of `Sepal.Length` and `Petal.Length`?
+
+
+```{r ex="Lists", type="sample-code"}
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="Lists", type="solution"}
+library(dplyr)
+
+# Question 1
+
+iris_filtered <- list(iris$Species, mean(iris$Sepal.Length), sd(iris$Petal.Width))
+
+iris_filtered[2]
+
+
+# Question 2 
+
+iris_values_petal_length_lt_2 <- iris$Petal.Length[which(iris$Petal.Length < 2)]
+
+iris_values_petal_length_lt_2[1:15]
+
+# Question 3
+
+
+iris_bool <- list(iris$Sepal.Length > 5)
+
+iris_bool[[1]]
+
+
+
+
+# Question 4
+
+iris_mutated <- iris %>% 
+                   select(Sepal.Length,Petal.Length, Species) %>% 
+                   mutate(Length_Ratio = Sepal.Length / Petal.Length)
+iris_mutated <- list(iris_mutated$Length_Ratio)
+
+iris_mutated[[1]][2]
+
+
+
+#Question 5
+
+iris_summarized <- iris %>% 
+                      group_by(Species) %>% 
+                      summarize(Mean_Sepal_Length = mean(Sepal.Length), Mean_Petal_Length = mean(Petal.Length))
+
+iris_summarized <- list(iris_summarized$Species, iris_summarized$Mean_Sepal_Length)
+
+iris_summarized[-1]
+
+
+
+
+
+
+```
+
+
+
+##Creating Data Frames
+
+Use the data.frame() function to name and define columns. Creating a data frame is similar to creating a list, except it is more restrictive.
+
+*Questions*
+
+Using `mtcars`:
+
+1. Create a data frame with two columns, "I" and "J", where I ranges from 1 to 10 and J is a repeating sequence of the word "Success" with the same length as I.
+
+2. Create a data frame with two columns, "numbers" and "words", where numbers range from 2 to 20 in increments of 2 and words alternate between "Won" and "Lost" with the same number of observations as numbers.
+
+3. Create a data frame with two columns, "name" and "age", where the name is a repeating sequence of the names "Mahesh Babu", "Pawan Kalyan", "Prabas", "Allu Arjun" and the age is a random sequence of integers between 20 and 30 with the same length as a name.
+
+4. Create a data frame with two new modified columns, `wt` and `qsec`, for the `mtcars` data set. The column `wt` should contain the sequence of numbers from 2 to 5 with a step of 0.5 and a length of 20, and the column `qsec` should contain the repeated value "17.02" for 20 times.
+
+5. Create a data frame with two columns, `hp` and `drat`, using the `mtcars` data set. The column `hp` should contain the first 10 observations, and the column `drat` should contain the next 10 observations.
+
+
+
+
+```{r ex="Creating Data Frames", type="sample-code"}
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="Creating Data Frames", type="solution"}
+library(dplyr)
+
+# Question 1
+
+I <- 1:10
+J <- rep("Success", times = length(I))
+df1 <- data.frame(I, J)
+df1
+
+# Question 2
+
+numbers <- seq(from = 2, to = 20, by = 2)
+words <- rep(c("Won", "Lost"), times = length(numbers)/2)
+df2 <- data.frame(numbers, words)
+df2
+
+# Question 3
+
+name <- rep(c("Mahesh Babu", "Pawan Kalyan", "Prabas", "Allu Arjun"), times = 2)
+age <- sample(20:30, size = length(name), replace = TRUE)
+df3 <- data.frame(name, age)
+df3
+
+# Question 4
+
+df4 <- data.frame(wt = seq(from = 2, by = 0.5, length.out = 20), qsec = rep("17.02", 20))
+head(df4)
+
+# Question 5
+
+df5 <- data.frame(hp = mtcars$hp[1:10], drat = mtcars$drat[11:20])
+head(df5)
+
+```
+
+
+
+
+#Writing Functions
+
+In R, a function is a block of code that performs a specific task. Functions are a way to organize and reuse code, making it more modular and easier to maintain. Functions take one or more input parameters, called arguments, and return one or more output values, called the return value.
+
+*Questions*
+
+Using  `mtcars`:
+
+1. Create a function reciprocal_var that takes in a data frame and a variable name as inputs and returns the data frame with the specified variable column replaced by its reciprocal values? And what is the result of running this function on the `mtcars` dataframe with the `mpg` column as the specified variable?
+
+2. Create a function filter_by_threshold that takes in a data frame, a variable name, and a threshold value as inputs and returns the rows of the data frame where the specified variable is greater than the given threshold? And what is the output when this function is run on the `mtcars` dataframe with the `hp` column as the specified variable and a threshold of 100?
+
+3. Create a function median_by_cylinder that takes in a data frame and a variable name as inputs and returns the median of the specified variable grouped by the `cyl` column? And what is the median of the `disp` column in the `mtcars` dataset grouped by the `cyl` column when this function is run? (Note: Use tapply())
+
+4. Create a function scatter_by_group that takes in a data frame, a list of variable names, and a color variable as inputs, and returns a scatter plot of the first variable on the x-axis, the second variable on the y-axis, and the points color-coded by the specified color variable? And what is the result when this function is run on the `mtcars` dataset with the `wt` and `mpg` columns as the variables for x and y axis respectively and `cyl` as the color variable?
+
+5. Create a function Cube_var that takes in a data frame and a variable name as inputs and returns the data frame with the specified variable column raised to the power of 3? And what is the effect of running this function on the `mtcars` dataframe with the `wt` column as the specified variable?
+
+
+
+```{r ex="Writing Functions", type="sample-code"}
+library(ggplot2)
+library(dplyr)
+
+
+
+```
+
+
+
+```{r ex="Writing Functions", type="solution"}
+library(ggplot2)
+library(dplyr)
+
+# Question 1
+
+reciprocal_var <- function(data, var){
+  
+  data[,var] <- 1/data[,var]
+  data
+}
+
+reciprocal_var(mtcars, "mpg")
+
+
+#Question 2
+
+filter_by_threshold <- function(data, var, threshold){
+  
+  return(data[data[,var] > threshold,])
+  
+}
+
+filter_by_threshold(mtcars, "hp", 100)
+
+
+#Question 3
+
+median_by_cylinder <- function(data, var) {
+  
+  tapply(data[,var], data$cyl, median)
+}
+median_by_cylinder(mtcars, "disp")
+
+#Question 4
+
+scatter_by_group <- function(data, var_list, color_var){
+  data %>% 
+     ggplot(aes_string(x = var_list[1], y = var_list[2], color = color_var)) + 
+     geom_point()
+}
+
+scatter_by_group(mtcars, c("wt","mpg"), "cyl")
+
+#Question 5
+
+Cube_var <- function(data, var){
+  
+  data[,var] <- data[,var]^3
+  data
+}
+
+Cube_var(mtcars, "wt")
+
+
+
+
+
+
+
+```
+
+
